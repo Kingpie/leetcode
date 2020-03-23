@@ -36,3 +36,7 @@ public:
         return count;
     }
 };
+solution.cpp: In member function dfs
+Line 22: Char 32: error: invalid types ‘<unresolved overloaded function type>[int]’ for array subscript
+import += dfs[subid];
+^
