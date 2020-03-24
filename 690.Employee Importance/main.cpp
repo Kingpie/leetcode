@@ -49,7 +49,6 @@ public:
     }
 
     int getImportance(vector<Employee*> employees, int id) {
-        unordered_map<int,Employee*> m;
         for(auto t:employees){
             m[t->id] = t;
         }
