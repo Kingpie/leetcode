@@ -16,6 +16,7 @@ You may assume that you have an infinite number of each kind of coin.
 链接：https://leetcode-cn.com/problems/coin-change
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
 
+//dp
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
@@ -31,6 +32,34 @@ public:
         if(dp[amount] == INT_MAX)
             dp[amount] = -1;
         return dp[amount];
+    }
+};
+
+class Solution {
+public:
+    int ans=INT_MAX;
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.begin(),coins.end());
+        dfs(coins,coins.size()-1,amount,0);
+        return ans == INT_MAX?-1:ans;
+    }
+    void dfs(vector<int>& coins,int index,int amount,int cnt){
+        if(index<0){
+            return;
+        }
+        for(int c=amount/coins[index];c>=0;c--){
+            int na=amount-c*coins[index];
+            int ncnt=cnt+c;
+            if(na==0){
+                ans=min(ans,ncnt);
+                break;//剪枝1
+            }
+            if(ncnt+1>=ans){
+                break; //剪枝2
+            }
+
+            dfs(coins,index-1,na,ncnt);
+        }
     }
 };
 
