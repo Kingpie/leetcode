@@ -42,7 +42,7 @@ public:
     }
 };
 ////////////////////////////////////////////////////////////
-
+//trie
 class TrieNode{
 public:
     vector<TrieNode*> child = vector<TrieNode*>(26,NULL);
