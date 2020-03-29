@@ -20,6 +20,7 @@ Only two moves are needed (remember each move increments or decrements one eleme
 链接：https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements-ii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
 
+//before optimized
 class Solution {
 public:
     int minMoves2(vector<int>& nums) {
