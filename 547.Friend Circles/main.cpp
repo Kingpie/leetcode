@@ -101,3 +101,32 @@ public:
         return cnt;
     }
 };
+
+//bfs
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        int m = M.size();
+        vector<int> visited(m,0);
+        queue<int> q;
+
+        int cnt = 0;
+        for(int i = 0; i < m;++i){
+            if(visited[i]==0){
+                cnt++;
+                q.push(i);
+                while(!q.empty()){
+                    auto point = q.front();
+                    q.pop();
+                    for(int j = 0; j < m;++j){
+                        if(M[point][j] && visited[j] != 1){
+                            visited[j] = 1;
+                            q.push(j);
+                        }
+                    }
+                }
+            }
+        }
+        return cnt;
+    }
+};
