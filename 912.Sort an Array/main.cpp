@@ -56,3 +56,21 @@ public:
         return nums;
     }
 };
+
+//bucket
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        vector<int> arr(100001,0);
+        for(int i = 0; i < nums.size();++i){
+            arr[nums[i]+50000]++;
+        }
+        vector<int> result;
+        for(int i = 0; i < arr.size();++i){
+            while(arr[i]--){
+                result.push_back(i-50000);
+            }
+        }
+        return result;
+    }
+};
