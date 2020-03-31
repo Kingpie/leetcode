@@ -97,3 +97,33 @@ public:
         sem.Signal();
     }
 };
+
+class DiningPhilosophers {
+public:
+    DiningPhilosophers() {
+    }
+
+    void wantsToEat(int philosopher,
+                    function<void()> pickLeftFork,
+                    function<void()> pickRightFork,
+                    function<void()> eat,
+                    function<void()> putLeftFork,
+                    function<void()> putRightFork) {
+        int l = philosopher;
+        int r = (philosopher+1)%5;
+        guid.lock();
+        lock[l].lock();
+        lock[r].lock();
+        pickLeftFork();
+        pickRightFork();
+        guid.unlock();
+        eat();
+        putRightFork();
+        putLeftFork();
+        lock[l].unlock();
+        lock[r].unlock();
+    }
+private:
+    std::mutex lock[5];
+    std::mutex guid;
+};
