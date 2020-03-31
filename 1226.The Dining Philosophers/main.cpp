@@ -43,3 +43,57 @@ public:
         lock[r].unlock();
     }
 };
+
+class Semaphore{
+private:
+    mutex mtx;
+    condition_variable cv;
+    int cnt;
+public:
+    Semaphore(int count=0) {cnt=count;}
+    void Set(int count) {cnt = count;}
+    void Signal(){
+        unique_lock<mutex> lock(mtx);
+        ++cnt;
+        cv.notify_one();
+    }
+    void Wait(){
+        unique_lock<mutex> lock(mtx);
+        while(cnt <= 0){
+            cv.wait(lock);
+        }
+        --cnt;
+    }
+};
+
+class DiningPhilosophers {
+private:
+    mutex lock[5];
+    Semaphore sem;
+public:
+    DiningPhilosophers() {
+        sem.Set(4);
+    }
+
+    void wantsToEat(int philosopher,
+                    function<void()> pickLeftFork,
+                    function<void()> pickRightFork,
+                    function<void()> eat,
+                    function<void()> putLeftFork,
+                    function<void()> putRightFork) {
+        int l = philosopher;
+        int r = (philosopher+1)%5;
+        sem.Wait();
+        lock[l].lock();
+        lock[r].lock();
+
+        pickLeftFork();
+        pickRightFork();
+        eat();
+        putRightFork();
+        putLeftFork();
+        lock[r].unlock();
+        lock[l].unlock();
+        sem.Signal();
+    }
+};
