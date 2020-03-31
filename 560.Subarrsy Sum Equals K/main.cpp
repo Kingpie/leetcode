@@ -12,7 +12,6 @@ The range of numbers in the array is [-1000, 1000] and the range of the integer 
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
 
 //prefix sum
-
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
@@ -25,6 +24,24 @@ public:
             if(m.count(sum-k))
                 cnt += m[sum-k];
             m[sum]++;
+        }
+        return cnt;
+    }
+};
+
+//force
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int len = nums.size();
+        int cnt = 0;
+        for(int i = 0; i < len; ++i){
+            int sum = 0;
+            for(int j = i; j < len; ++j){
+                sum += nums[j];
+                if(sum == k)
+                    cnt++;
+            }
         }
         return cnt;
     }
