@@ -48,3 +48,31 @@ public:
         return false;
     }
 };
+
+//prefix sum
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        int len = nums.size();
+        if(len < 2) return false;
+        if(k==0){
+            for(int i = 1; i < len;++i){
+                if(nums[i] == 0 && nums[i-1] == 0)
+                    return true;;
+            }
+            return false;
+        }
+
+        k = abs(k);
+        unordered_set<int> s{0};
+        int t = nums[0]%k;
+
+        for(int i = 1; i < len;++i){
+            int t1 = t;
+            t = (t+nums[i])%k;
+            if(s.count(t)) return true;
+            s.insert(t1);
+        }
+        return false;
+    }
+};
