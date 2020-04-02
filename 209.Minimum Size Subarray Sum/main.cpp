@@ -20,8 +20,7 @@ public:
             sum += nums[end];
             while(sum >= s){
                 minLen = min(minLen,end-start+1);
-                sum = sum - nums[start];
-                start++;
+                sum -= nums[start++];
             }
             end++;
         }
