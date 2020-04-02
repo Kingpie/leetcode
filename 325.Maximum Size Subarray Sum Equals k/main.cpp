@@ -36,3 +36,24 @@ public:
         return maxLen==INT_MIN?0:maxLen;
     }
 };
+
+//prefix sum
+class Solution {
+public:
+    int maxSubArrayLen(vector<int>& nums, int k) {
+        int len = nums.size();
+        int maxLen = 0;
+        int sum = 0;
+        unordered_map<int,int> m{{0,0}};
+
+        for(int i = 0; i < len;++i){
+            sum += nums[i];
+            if(m.count(sum-k)){
+                maxLen = max(maxLen,i-m[sum-k]+1);
+            }
+            if(m.count(sum) == 0)
+                m[sum] = i+1;
+        }
+        return maxLen;
+    }
+};
