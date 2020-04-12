@@ -52,3 +52,25 @@ public:
     }
 };
 
+//stack
+class Solution {
+public:
+    TreeNode* mirrorTree(TreeNode* root) {
+        stack<TreeNode*> s;
+        if(root)
+            s.push(root);
+
+        while(!s.empty()){
+            auto node = s.top();
+            s.pop();
+
+            if(node == nullptr)
+                continue;
+            swap(node->left, node->right);
+            s.push(node->left);
+            s.push(node->right);
+        }
+        return root;
+    }
+};
+
