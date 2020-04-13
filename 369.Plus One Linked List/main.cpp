@@ -58,3 +58,41 @@ public:
         return ans->next;
     }
 };
+
+//reverse list
+class Solution {
+public:
+    ListNode* reverse(ListNode* head){
+        ListNode* cur = head;
+        ListNode* pre = nullptr;
+
+        while(cur){
+            auto temp = cur;
+            cur = cur->next;
+            temp->next = pre;
+            pre = temp;
+        }
+        return pre;
+    }
+
+    ListNode* plusOne(ListNode* head) {
+        auto rev = reverse(head);
+        auto temp = rev;
+        int flag = 1;
+        while(temp){
+            temp->val = temp->val+flag;
+            if(temp->val>9){
+                temp->val = temp->val%10;
+            }else{
+                flag = 0;
+            }
+            if(flag && !temp->next){
+                temp->next = new ListNode(1);
+                break;
+            }
+
+            temp = temp->next;
+        }
+        return reverse(rev);
+    }
+};
