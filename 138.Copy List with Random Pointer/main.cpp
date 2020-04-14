@@ -63,12 +63,9 @@ public:
 
         temp = head;
         while(temp){
-            if(temp->next){
-                mp[temp]->next = mp[temp->next];
-            }
-            if(temp->random){
-                mp[temp]->random = mp[temp->random];
-            }
+            mp[temp]->next = mp[temp->next];
+            mp[temp]->random = mp[temp->random];
+
             temp = temp->next;
         }
         return mp[head];
