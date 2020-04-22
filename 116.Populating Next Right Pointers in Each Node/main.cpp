@@ -49,22 +49,17 @@ public:
 
         while(!q.empty()){
             int size = q.size();
-            Node* pre = q.front();
             while(size-->0){
                 auto node = q.front();
                 q.pop();
 
-                if(q.empty())
-                    node->next=nullptr;
-
-                if(pre != node)
-                    pre->next = node;
+                if(size)
+                    node->next=q.front();
 
                 if(node->left)
                     q.push(node->left);
                 if(node->right)
                     q.push(node->right);
-                pre = node;
             }
         }
         return root;
