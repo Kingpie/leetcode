@@ -25,6 +25,8 @@ Explanation:
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+//bfs
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
@@ -47,6 +49,28 @@ public:
                     ans.push_back(node->val);
             }
         }
+
+        return ans;
+    }
+};
+
+//dfs
+class Solution {
+public:
+    void dfs(TreeNode* node,vector<int>& ans,int depth){
+        if(!node) return;
+
+        if(depth == ans.size()){
+            ans.push_back(node->val);
+        }
+
+        depth++;
+        dfs(node->right,ans,depth);
+        dfs(node->left,ans,depth);
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> ans;
+        dfs(root,ans,0);
 
         return ans;
     }
