@@ -56,3 +56,29 @@ public:
         return ans;
     }
 };
+
+//stack
+class Solution {
+public:
+
+    vector<int> postorder(Node* root) {
+        vector<int> ans;
+        stack<Node*> s1,s2;
+        if(root)
+            s1.push(root);
+        while(!s1.empty()){
+            auto node = s1.top();
+            s1.pop();
+            s2.push(node);
+
+            for(int i = 0; i < node->children.size();++i){
+                s1.push(node->children[i]);
+            }
+        }
+        while(!s2.empty()){
+            ans.push_back(s2.top()->val);
+            s2.pop();
+        }
+        return ans;
+    }
+};
