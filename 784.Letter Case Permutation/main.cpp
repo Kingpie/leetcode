@@ -18,6 +18,7 @@ S will consist only of letters or digits.
 链接：https://leetcode-cn.com/problems/letter-case-permutation
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
 
+//backtrace
 class Solution {
     vector<string> ans;
 public:
@@ -44,6 +45,24 @@ public:
     }
     vector<string> letterCasePermutation(string S) {
         backtrace(S,0);
+        return ans;
+    }
+};
+
+//iteration
+class Solution {
+public:
+    vector<string> letterCasePermutation(string S) {
+        vector<string> ans{S};
+        for(int i = 0; i < S.size(); i++){
+            if(isalpha(S[i])){
+                for(int j = ans.size() - 1; j >= 0; j--){
+                    ans.push_back(ans[j]);
+                    if(isupper(ans[j][i])) ans[j][i] = tolower(ans[j][i]);
+                    else ans[j][i] = toupper(ans[j][i]);
+                }
+            }
+        }
         return ans;
     }
 };
