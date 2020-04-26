@@ -44,7 +44,7 @@ public:
         while(start<end){
             int mid = start+(end-start)/2;
             if(target>nums[mid]){
-                start=mid+1;
+                start=mid+1; //this
             }else{
                 end=mid;
             }
