@@ -37,3 +37,13 @@ public:
     }
 };
 
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        char a = 0;
+        for(char ss:s) a ^= ss;
+        for(char tt:t) a ^= tt;
+        return a;
+    }
+};
+
